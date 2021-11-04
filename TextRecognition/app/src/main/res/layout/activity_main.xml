@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageId"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="45dp"
         android:layout_weight="0.4">
     </ImageView>
 
@@ -42,7 +42,7 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/detect">
+                android:background="@drawable/detect3">
             </ImageView>
         </LinearLayout>
 
@@ -63,9 +63,9 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/camera">
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/camera2">
             </ImageView>
 
         </LinearLayout>
@@ -77,14 +77,14 @@
             android:layout_weight="0.5"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:text="TTS"
-                android:textSize="30dp">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/texttospeech">
+            </ImageView>
 
-            </TextView>
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

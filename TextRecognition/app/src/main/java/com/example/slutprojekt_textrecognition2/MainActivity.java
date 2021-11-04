@@ -33,6 +33,7 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,14 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cameraLayout.setOnClickListener(this);
         launchTTS.setOnClickListener(this);
 
-        // check if camera permission is granted
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            // grant permission for camera
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);
-        }
 
         // Initiate ActivityResultLauncher and handle the ActivityResult
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
                 // if image is successful pass it to the bundle then set the image in imageView.
@@ -85,14 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    /*public void doProcess(View view) {
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        activityResultLauncher.launch(intent);
-
-    }*/
-
-    // Method for handling the different buttons.
+    // Method for handling the different button clicks.
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -107,10 +99,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 askCameraPermissions();
                 break;
             case R.id.textToSpeech:
-                Toast.makeText(MainActivity.this, "Text to speech function not implemented yet.", Toast.LENGTH_SHORT).show();
-                // galleryAddPic();
+                switchActivity();
                 break;
         }
+    }
+
+
+    // Method for starting and sending detected text to the TextToSpeech Activity.
+    public void switchActivity() {
+
+        String detectedText = textView.getText().toString();
+        Intent intent = new Intent(this, TextToSpeechActivity.class);
+        intent.putExtra("TEXT_TO_SEND", detectedText);
+
+        startActivity(intent);
     }
 
     // Method for launching camera.
